@@ -1,8 +1,8 @@
-<div class="mainupload">
-    <form>
+<div id="mainupload" >
+    <form action="/save" method=post enctype=multipart/form-data>
         <input type="text" name="title"/><br>
-        <input type="text" name="description"/>
-        
-        <input type="submit"/>
+        <input type="text" name="description"/><br>
+        <input type=file name=file>
+         <input id="upload2" type=submit value=Upload>
     </form>
 </div>

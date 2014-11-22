@@ -4,3 +4,18 @@ body{
 .object_container{
     color: #FF3399;
 }
+#mainupload:not(.showdialog){
+    display: none;
+}
+.showdialog{
+    display: absolute;
+    top: 10px;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    z-index: 100000;
+}
+.variableimage{
+width:400px;
+height:400px;
+}

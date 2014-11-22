@@ -1,81 +1,96 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../favicon.ico">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="static/script.js"></script>
+        <title>Mmmm...</title>
+        <link type="text/css" href="static/stylesheet.css" rel="stylesheet">
 
-    <title>Mmmm...</title>
-    <link type="text/css" href="static/stylesheet.css" rel="stylesheet">
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+    </head>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+    <body>
 
-  <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">SecretSauce</a>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">SecretSauce</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+        <div id="mainupload" >
+            <form action="/save" method=post enctype=multipart/form-data>
+                <input type="text" name="title"/><br>
+                <input type="text" name="description"/><br>
+                <input type=file name=file>
+                <input id="upload2" type=submit value=Upload>
+            </form>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Welcome</h1>
-        <p>Share anything with anyone, at any time. Anonymously</p>
-        <p></p>
-      </div>
-    </div>
-
-    <div class="container">
-      <!-- Example row of columns -->
-        {%for entry in entries%}
-        <div class="object_container">
-        <div class="col-md-3">
-          <h2>{{entry.title}}</h2>
-        <img src="{{entry.path}}"/>
-          <p>{{entry.description}}</p>
-          <p><a class="btn btn-default" href="/getFile/{{entry.title}}" role="button">Download File &raquo;</a></p>
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Welcome</h1>
+                <p>Share anything with anyone, at any time. Anonymously</p>
+                <p></p>
+                <button type="button" id="uploadbutton" class="btn btn-primary btn-lg">
+                    Upload File
+                </button>
+            </div>
         </div>
-        </div>
-        {%endfor%}
-      <hr>
 
-      
-    </div> <!-- /container -->
+        <div class="container">
+            <!-- Example row of columns -->
+            {%for entry in entries%}
+            <div class="object_container">
+                <div class="col-md-3">
+                    <h2>{{entry.title}}</h2>
+                    {%if isImage(entry)%}
+                    <img src="{{entry.path}}" class="img-circle"/>
+                    {% else %}
+                    <img style="width:auto; height:auto;" src="static/uploads/question.png" class="img-circle"/>
+                    {%endif%}
+
+                    <p>{{entry.description}}</p>
+                    <p><a class="btn btn-default" href="/getFile/{{entry.title}}" role="button">Download File &raquo;</a></p>
+                </div>
+            </div>
+            {%endfor%}
+            <hr>
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="static/dist/js/bootstrap.min.js"></script>
-  </body>
+        </div> <!-- /container -->
+
+
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="static/dist/js/bootstrap.min.js"></script>
+    </body>
 </html>

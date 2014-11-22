@@ -7,7 +7,7 @@ import pdb
 def parse_files():
     entries=[]
     for dirname, dirnames, filenames in os.walk('static/uploads/'):
-    # print path to all subdirectories first.
+    # print path to all subdirectories firs
         for subdirname in dirnames:
             print os.path.join(dirname, subdirname)
 
@@ -17,7 +17,7 @@ def parse_files():
 
             entries.append(Entry(filename, directory, "Some description"))
     return entries
-    
+
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 UPLOAD_FOLDER = 'static/uploads'
@@ -31,27 +31,19 @@ parse_files()
 @app.route('/')
 def hello():
     entries=parse_files()
-    return render_template('index.html',static_folder='static/',entries=entries)
+    return render_template('index2.html',static_folder='static/',entries=entries,isImage=isImage)
 
 @app.route('/save', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
+        title=request.form['title']
         file = request.files['file']
         if file:
             filename = secure_filename(file.filename)
             filePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             entries.append(Entry(filename, filePath, "Some Description"))
             file.save(filePath)
-            return "Thanks for uploading"
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form action="" method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    '''
+        return "Thank you come again"
 
 @app.route('/getFile/<file>', methods=['GET'])
 def getFile(file):
@@ -59,6 +51,12 @@ def getFile(file):
                        mimetype="multipart/mixed",
                        headers={"Content-Disposition":
                                     "attachment;filename=" + file})
-
+def isImage(entry):
+    #pdb.set_trace()
+    extension=os.path.splitext(entry.path)[1]
+    if(extension==".png"or extension==".jpg" or extension==".jpeg"):
+        return True
+    else:
+        return False
 if __name__ == "__main__":
     app.run()

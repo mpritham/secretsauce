@@ -11,53 +11,79 @@
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<link href="static/styles.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="static/script.js"></script>
+		<title>Mmmm...</title>
+		<link type="text/css" href="static/stylesheet.css" rel="stylesheet">
+
+		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 <div class="wrapper">
     <div class="box">
         <div class="row">
-          
+
             <!-- sidebar -->
             <div class="column col-sm-3" id="sidebar">
                 <a class="logo" href="#">SS</a>
                 <ul class="nav">
-                    <li class="active"><a href="#featured">Featured</a>
-                    </li>
-                    <li><a href="#stories">Stories</a>
-                    </li>
+
+                    <button type="button" id="uploadbutton" class="btn btn-primary btn-lg">
+																						Upload File
+																				</button>
                 </ul>
             </div>
             <!-- /sidebar -->
-          
+
             <!-- main -->
+						<div id="mainupload" >
+								<form action="/save" method=post enctype=multipart/form-data>
+										<input type="text" name="title"/><br>
+										<input type="text" name="description"/><br>
+										<input type=file name=file>
+										<input id="upload2" type=submit value=Upload>
+								</form>
+						</div>
             <div class="column col-sm-9" id="main">
                 <div class="padding">
                     <div class="full col-sm-9">
-                      
+
                         <!-- content -->
-                        
-                        <div class="col-sm-12" id="stories">  
+
+                        <div class="col-sm-12" id="stories">
                           <div class="page-header text-muted divider">
                             Top Uploads
                           </div>
                         </div>
-                        
-                        
+
+
                         <!--/stories-->
                         {%for entry in entries%}
-                        <div class="row">    
+                        <div class="row">
                           <div class="col-sm-10">
                             <h3>{{entry.title}}</h3>
                             <h4><span class="label label-default"><a href="/getFile/{{entry.title}}">Download</a></span></h4><h4>
                             <small class="text-muted">{{entry.description}}</small>
                             </h4>
                           </div>
-                          <!-- <div class="col-sm-2">
-                            <a href="#" class="pull-right"><img src="http://api.randomuser.me/portraits/thumb/men/86.jpg" class="img-circle"></a>
-                          </div>  -->
+                          <div class="col-sm-2">
+                            <a href="#" class="pull-right">
+														{%if isImage(entry)%}
+														<img  src="{{entry.path}}" class="img-circle variableimage"/>
+														{% else %}
+														<img  src="static/uploads/download.jpg" class="img-circle variableimage"/>
+														{%endif%}</a>
+                          </div>
                         </div>
-                        
-                        <div class="row divider">    
+
+                        <div class="row divider">
                            <div class="col-sm-12"><hr></div>
                         </div>
                         {%endfor%}
@@ -68,12 +94,12 @@
                             Up Next
                           </div>
                         </div>
-                        
+
                         <hr>
-                      
-                        <div class="row" id="footer">    
+
+                        <div class="row" id="footer">
                           <div class="col-sm-6">
-                            
+
                           </div>
                           <div class="col-sm-6">
                             <p>
@@ -81,12 +107,12 @@
                             </p>
                           </div>
                         </div>
-                                            
+
                     </div><!-- /col-9 -->
                 </div><!-- /padding -->
             </div>
             <!-- /main -->
-          
+
         </div>
     </div>
 </div>
