@@ -43,7 +43,7 @@ def upload_file():
             filePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             entries.append(Entry(filename, filePath, "Some Description"))
             file.save(filePath)
-        return "Thank you come again"
+        return render_template('thanks.html')
 
 @app.route('/getFile/<file>', methods=['GET'])
 def getFile(file):

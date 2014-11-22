@@ -45,6 +45,7 @@ a {
     position: absolute;
     right: 0;
     top: 0;
+    background-image:url('http://lorempixel.com/1024/760/nature/3/');
     background-size:cover;
     background-attachment:fixed;
 }
@@ -60,14 +61,11 @@ a {
   margin-top:18px;
   height:200px;
   width:200px;
+
 }
 
 #sidebar, #sidebar a {
     color:#ffffff;
-    background-image:url('https://unsplash.imgix.net/reserve/kKvwBPaT9ucgomTWSQx9_switzerland-photo.jpg?fit=crop&fm=jpg&h=700&q=75&w=1050');
-    background-repeat:no-repeat;
-    background-size:auto 100%;
-
     background-color:transparent;
 	text-shadow:1px 0 1px #888888;
 }

@@ -6,10 +6,16 @@ body{
 }
 #mainupload:not(.showdialog){
     display: none;
+    position: absolute;
+    background-color:#FFF;
 }
 .showdialog{
-    display: absolute;
+    display: static;
+    position:absolute;
+    background-color:#33CCFF;
     top: 10px;
+    left:25%;
+    right:25%;
     width: 50%;
     height: 50%;
     margin: auto;
