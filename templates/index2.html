@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Secret Sauce</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="static/styles.css" rel="stylesheet">
+	</head>
+	<body>
+<div class="wrapper">
+    <div class="box">
+        <div class="row">
+          
+            <!-- sidebar -->
+            <div class="column col-sm-3" id="sidebar">
+                <a class="logo" href="#">B</a>
+                <ul class="nav">
+                    <li class="active"><a href="#featured">Featured</a>
+                    </li>
+                    <li><a href="#stories">Stories</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /sidebar -->
+          
+            <!-- main -->
+            <div class="column col-sm-9" id="main">
+                <div class="padding">
+                    <div class="full col-sm-9">
+                      
+                        <!-- content -->
+                        
+                        <div class="col-sm-12" id="stories">  
+                          <div class="page-header text-muted divider">
+                            Top Uploads
+                          </div>
+                        </div>
+                        
+                        
+                        <!--/stories-->
+                        {%for entry in entries%}
+                        <div class="row">    
+                          <div class="col-sm-10">
+                            <h3>{{entry.title}}</h3>
+                            <h4><span class="label label-default"><a href="/getFile/{{entry.title}}">Download</a></span></h4><h4>
+                            <small class="text-muted">{{entry.description}}</small>
+                            </h4>
+                          </div>
+                          <!-- <div class="col-sm-2">
+                            <a href="#" class="pull-right"><img src="http://api.randomuser.me/portraits/thumb/men/86.jpg" class="img-circle"></a>
+                          </div>  -->
+                        </div>
+                        
+                        <div class="row divider">    
+                           <div class="col-sm-12"><hr></div>
+                        </div>
+                        {%endfor%}
+                        <!--/stories-->
+
+                        <div class="col-sm-12">
+                          <div class="page-header text-muted divider">
+                            Up Next
+                          </div>
+                        </div>
+                        
+                        <hr>
+                      
+                        <div class="row" id="footer">    
+                          <div class="col-sm-6">
+                            
+                          </div>
+                          <div class="col-sm-6">
+                            <p>
+                            <a href="#" class="pull-right">©Copyright Inc.</a>
+                            </p>
+                          </div>
+                        </div>
+                                            
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+          
+        </div>
+    </div>
+</div>
+	<!-- script references -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script><script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
