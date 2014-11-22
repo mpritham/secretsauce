@@ -1,11 +1,13 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 from werkzeug import secure_filename
 
-UPLOAD_FOLDER = '/uploads'
+UPLOAD_FOLDER = 'uploads'
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 @app.route('/')
 def hello():
     return render_template('index.html')
@@ -17,7 +19,7 @@ def upload_file():
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            
+            return "TEST" 
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -30,7 +32,7 @@ def upload_file():
 
 if __name__ =="__main__":
     app.run()
-    
+
 class Entry:
     def __init__(self,title, path,description):
         self.title=title
