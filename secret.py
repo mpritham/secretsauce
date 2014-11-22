@@ -4,17 +4,31 @@ from werkzeug import secure_filename
 from models import Entry
 import pdb
 
+def parse_files():
+    entries=[]
+    for dirname, dirnames, filenames in os.walk('static/uploads/'):
+    # print path to all subdirectories first.
+        for subdirname in dirnames:
+            print os.path.join(dirname, subdirname)
+
+    # print path to all filenames.
+        for filename in filenames:
+            directory =os.path.join(dirname, filename)
+            entries.append(Entry("New",directory,"Some description"))
+    return entries
+    
+
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 UPLOAD_FOLDER = 'static/uploads'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+parse_files()
 @app.route('/')
 def hello():
-    print "test"
-    entries= [Entry("meow","static/uploads/download.jpg","test")]
-    return render_template('index.html',static_folder='templates/',entries=entries)
+    entries=parse_files()
+    return render_template('index.html',static_folder='static/',entries=entries)
+
 
 @app.route('/save', methods=['GET', 'POST'])
 def upload_file():
@@ -36,17 +50,5 @@ def upload_file():
 
 if __name__ =="__main__":
     app.run()
+    
 
-
-# class Entry:
-#     def __init__(self, title, path,description):
-#         self.title=title
-#         self.path=path
-#         self.description=description
-#    def getTitle(self):
-#        return self.title
-#    def getDescription(self):
-#        return self.description
-#    def getPath(self):
-#        return self.path
-#        
