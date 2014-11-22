@@ -1,9 +1,10 @@
 import os
 from flask import Flask, render_template, request
-tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 from werkzeug import secure_filename
+from models import Entry
 import pdb
 
+tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 UPLOAD_FOLDER = 'uploads'
 
 app = Flask(__name__)
@@ -11,7 +12,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def hello():
-    print "test"
     pdb.set_trace()
     entries=[Entry("Hello buddy","something","Lorem ipsum")]
     pdb.set_trace()
@@ -39,12 +39,11 @@ def upload_file():
 if __name__ =="__main__":
     app.run()
 
-class Entry:
-    def __init__(self, title, path,description):
-        self.title=title
-        self.path=path
-        self.description=description
-        print title
+# class Entry:
+#     def __init__(self, title, path,description):
+#         self.title=title
+#         self.path=path
+#         self.description=description
 #    def getTitle(self):
 #        return self.title
 #    def getDescription(self):
