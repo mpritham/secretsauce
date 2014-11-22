@@ -36,13 +36,14 @@ def hello():
 @app.route('/save', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        title=request.form['title']
-        file = request.files['file']
-        if file:
-            filename = secure_filename(file.filename)
-            filePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            entries.append(Entry(filename, filePath, "Some Description"))
-            file.save(filePath)
+
+        x = request.files.getlist("file")
+        if x:
+            for file in x:
+                filename = secure_filename(file.filename)
+                filePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                entries.append(Entry(filename, filePath, "Some Description"))
+                file.save(filePath)
         return render_template('thanks.html')
 
 @app.route('/getFile/<file>', methods=['GET'])
@@ -59,4 +60,4 @@ def isImage(entry):
     else:
         return False
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
