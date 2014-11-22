@@ -5,7 +5,7 @@ from models import Entry
 import pdb
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'static/uploads'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -13,8 +13,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/')
 def hello():
     print "test"
-    entries= [Entry("meow","test","test"),Entry("test","test","test")]
-    return render_template('index.html',entries=entries)
+    entries= [Entry("meow","static/uploads/download.jpg","test")]
+    return render_template('index.html',static_folder='templates/',entries=entries)
 
 @app.route('/save', methods=['GET', 'POST'])
 def upload_file():
