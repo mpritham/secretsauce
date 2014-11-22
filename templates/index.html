@@ -10,7 +10,7 @@
     <link rel="icon" href="../favicon.ico">
 
     <title>Mmmm...</title>
-    <link type="text/css" href="{{ url_for('static', filename='stylesheet.css') }}" rel="stylesheet">
+    <link type="text/css" href="static/stylesheet.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]--><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -57,13 +57,14 @@
     <div class="container">
       <!-- Example row of columns -->
         {%for entry in entries%}
+        <div class="object_container">
         <div class="col-md-3">
           <h2>{{entry.title}}</h2>
         <img src="{{entry.path}}"/>
           <p>{{entry.description}}</p>
           <p><a class="btn btn-default" href="#" role="button">Download File &raquo;</a></p>
         </div>
-   
+        </div>
         {%endfor%}
       <hr>
 

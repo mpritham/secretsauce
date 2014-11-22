@@ -14,7 +14,7 @@ def parse_files():
     # print path to all filenames.
         for filename in filenames:
             directory =os.path.join(dirname, filename)
-            entries.append(Entry("New",directory,"Some description"))
+            entries.append(Entry(filename,directory,"Some description"))
     return entries
     
 
