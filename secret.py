@@ -12,10 +12,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/')
 def hello():
     print "test"
+    x= [Entry("test","test","test"),Entry("test","test","test")]
+    print entries[0].title
     pdb.set_trace()
-    entries=[Entry("Hello buddy","something","Lorem ipsum")]
-    pdb.set_trace()
-    print entries.title
     return render_tsemplate('index.html')
 
 @app.route('/save', methods=['GET', 'POST'])
@@ -44,7 +43,6 @@ class Entry:
         self.title=title
         self.path=path
         self.description=description
-        print title
 #    def getTitle(self):
 #        return self.title
 #    def getDescription(self):
