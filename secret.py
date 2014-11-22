@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 from werkzeug import secure_filename
 from models import Entry
 import pdb
@@ -14,12 +14,16 @@ def parse_files():
     # print path to all filenames.
         for filename in filenames:
             directory =os.path.join(dirname, filename)
-            entries.append(Entry(filename,directory,"Some description"))
+
+            entries.append(Entry(filename, directory, "Some description"))
     return entries
     
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 UPLOAD_FOLDER = 'static/uploads'
+
+#Entries dict
+entries = []
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -29,15 +33,16 @@ def hello():
     entries=parse_files()
     return render_template('index.html',static_folder='static/',entries=entries)
 
-
 @app.route('/save', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
         if file:
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return "TEST" 
+            filePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            entries.append(Entry(filename, filePath, "Some Description"))
+            file.save(filePath)
+            return "Thanks for uploading"
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -48,7 +53,12 @@ def upload_file():
     </form>
     '''
 
-if __name__ =="__main__":
-    app.run()
-    
+@app.route('/getFile/<file>', methods=['GET'])
+def getFile(file):
+    return Response(open('static/uploads/' + file),
+                       mimetype="multipart/mixed",
+                       headers={"Content-Disposition":
+                                    "attachment;filename=" + file})
 
+if __name__ == "__main__":
+    app.run()
