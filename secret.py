@@ -54,7 +54,7 @@ def getFile(file):
 def isImage(entry):
     #pdb.set_trace()
     extension=os.path.splitext(entry.path)[1]
-    if(extension==".png"or extension==".jpg" or extension==".jpeg"):
+    if(extension==".png"or extension==".jpg" or extension==".jpeg" or extension == ".bmp"):
         return True
     else:
         return False

@@ -34,10 +34,9 @@
             <div class="column col-sm-3" id="sidebar">
                 <a class="logo" href="#">SS</a>
                 <ul class="nav">
-
-                    <button type="button" id="uploadbutton" class="btn btn-primary btn-lg">
-																						Upload File
-																				</button>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Upload File
+                </button>
                 </ul>
             </div>
             <!-- /sidebar -->
@@ -51,6 +50,8 @@
 										<input id="upload2" type=submit value=Upload>
 								</form>
 						</div>
+
+
             <div class="column col-sm-9" id="main">
                 <div class="padding">
                     <div class="full col-sm-9">
@@ -62,6 +63,34 @@
                             Top Uploads
                           </div>
                         </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">File upload</h4>
+      </div>
+      <div class="modal-body">
+        <form action="/save" method=post enctype=multipart/form-data>
+                    <input type="text" name="title"/><br>
+                    <input type="text" name="description"/><br>
+                    <input type=file name=file>
+                    <input id="upload2" type=submit value="Upload">
+                </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 
                         <!--/stories-->
