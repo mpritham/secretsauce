@@ -12,9 +12,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def hello():
-    print "test"
-    entries= [Entry("meow","test","test"),Entry("test","test","test")]
-    return render_template('index.html',entries=entries)
+    entries = [Entry("meow","test","test"),Entry("test","test","test")]
+    return render_template('index.html', entries=entries)
 
 @app.route('/save', methods=['GET', 'POST'])
 def upload_file():
@@ -36,17 +35,3 @@ def upload_file():
 
 if __name__ =="__main__":
     app.run()
-
-
-# class Entry:
-#     def __init__(self, title, path,description):
-#         self.title=title
-#         self.path=path
-#         self.description=description
-#    def getTitle(self):
-#        return self.title
-#    def getDescription(self):
-#        return self.description
-#    def getPath(self):
-#        return self.path
-#        
