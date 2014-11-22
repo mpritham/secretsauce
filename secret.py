@@ -51,12 +51,13 @@ def upload_file():
          <input type=submit value=Upload>
     </form>
     '''
-@app.route('/getFile', methods=['GET'])
-def get():
-    return Response(open('uploads/test.c'),
+
+@app.route('/getFile/<file>', methods=['GET'])
+def getFile(file):
+    return Response(open('static/uploads/' + file),
                        mimetype="multipart/mixed",
                        headers={"Content-Disposition":
-                                    "attachment;filename="+"test.c"})
+                                    "attachment;filename=" + file})
 
 if __name__ == "__main__":
     app.run()
