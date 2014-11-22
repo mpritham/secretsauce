@@ -2,12 +2,14 @@ import os
 from flask import Flask, render_template
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 from werkzeug import secure_filename
-
 UPLOAD_FOLDER = '/uploads'
 
 app = Flask(__name__)
 @app.route('/')
 def hello():
+    print "test"
+    entries=[Entry("Hello buddy","something","Lorem ipsum"),Entry("Hello buddy","something","Lorem ipsum")]
+    print entries.title
     return render_template('index.html')
 
 @app.route('/save', methods=['GET', 'POST'])
@@ -36,11 +38,10 @@ class Entry:
         self.title=title
         self.path=path
         self.description=description
-    def getTitle():
+    def getTitle(self):
         return self.title
-    def getDescription():
+    def getDescription(self):
         return self.description
-    def getPath():
+    def getPath(self):
         return self.path
-        
         

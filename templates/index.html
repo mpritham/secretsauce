@@ -57,21 +57,20 @@
       <div class="container">
         <h1>Welcome</h1>
         <p>Share anything with anyone, at any time. Anonymously</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <p></p>
       </div>
     </div>
 
     <div class="container">
       <!-- Example row of columns -->
-      <div class="row">
+        {%for entry in entries%}
         <div class="col-md-3">
-          <h2>{}</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h2>{entry.title}</h2>
+          <p>{entry.description}</p>
+          <p><a class="btn btn-default" href="#" role="button">Download File &raquo;</a></p>
         </div>
    
-      </div>
-
+        {%endfor%}
       <hr>
 
       <footer>
