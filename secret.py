@@ -30,6 +30,7 @@ def upload_file():
 
 if __name__ =="__main__":
     app.run()
+    
 class Entry:
     def __init__(self,title, path,description):
         self.title=title
